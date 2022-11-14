@@ -7,16 +7,16 @@ const Appoinment = () => {
 
     return (
         <div>
-             <AppointmentBanner 
-             selectedDate={selectedDate}
-             setSelectedDate={setSelectedDate}
-             ></AppointmentBanner> 
-             <AvilableAppoinments
-             selectedDate={selectedDate}
-             setSelectedDate={setSelectedDate}
-             ></AvilableAppoinments>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            <AppointmentBanner
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+            ></AppointmentBanner>
+            <AvilableAppoinments
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+            ></AvilableAppoinments>
         </div>
-    ); 
+    );
 };
 
 export default Appoinment;                                                                                                                                                                                                
