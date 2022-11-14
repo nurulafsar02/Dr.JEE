@@ -16,7 +16,7 @@ const AppoinmentHomeCard = () => {
                         <h1 className="text-4xl text-white font-bold">Make an appointment Today</h1>
                         <p className="py-6 text-white">Provident cupiditate voluptatem et in. Quaerat fugiat <br />
                          ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                        <Link to='appointment'><PrimaryButton>Get Appointment</PrimaryButton></Link>
+                        <Link className='text-center lg:text-left' to='appointment'><PrimaryButton>Get Appointment</PrimaryButton></Link>
                     </div>
                 </div>
             </div>

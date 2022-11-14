@@ -18,15 +18,15 @@ export const router =createBrowserRouter([
                 element:<Home></Home>
             },
             {
-                path:'appointment',
+                path:'/appointment',
                 element:<Appoinment></Appoinment>
             },
             {
-                path:'about',
+                path:'/about',
                 element:<About></About>
             },
             {
-                path:'contact',
+                path:'/contact',
                 element:<Contact></Contact>
             }, 
             {
