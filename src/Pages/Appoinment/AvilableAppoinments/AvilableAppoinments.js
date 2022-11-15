@@ -1,9 +1,12 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import Booking from '../Booking/Booking';
 import AvilableAppoinmentsCard from './AvilableAppoinmentsCard';
 
 const AvilableAppoinments = ({ selectedDate, setSelectedDate }) => {
     const [AppoinmentsOptions, setAppoinmentsOptions]=useState([])
+    const [treatment, setTreatment]=useState(null);
+
     useEffect(()=>{
         fetch('appointmentService.json')
         .then(res => res.json())
@@ -17,9 +20,18 @@ const AvilableAppoinments = ({ selectedDate, setSelectedDate }) => {
                    AppoinmentsOptions.map(optionAppoinment =><AvilableAppoinmentsCard
                    key={optionAppoinment._id}
                    optionAppoinment={optionAppoinment}
+                   setTreatment={setTreatment}
                    ></AvilableAppoinmentsCard>) 
                 }
             </div>
+           {
+            treatment && 
+            <Booking 
+            treatment={treatment}
+            selectedDate={selectedDate}
+            setTreatment ={setTreatment}
+            ></Booking>
+           }
         </div>
     );
 };
