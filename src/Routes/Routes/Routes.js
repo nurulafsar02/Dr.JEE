@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../../Dashboard/Dashbord/Dashboard";
 import Main from "../../Layouts/Main";
 import About from "../../Pages/About/About";
 import Appoinment from "../../Pages/Appoinment/Appoinment";
@@ -7,6 +8,7 @@ import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Review from "../../Pages/Review/Review";
 import Singin from "../../Pages/SingIn/Singin";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router =createBrowserRouter([
     {
@@ -19,7 +21,7 @@ export const router =createBrowserRouter([
             },
             {
                 path:'/appointment',
-                element:<Appoinment></Appoinment>
+                element:<PrivateRoute><Appoinment></Appoinment></PrivateRoute>
             },
             {
                 path:'/about',
@@ -27,21 +29,24 @@ export const router =createBrowserRouter([
             },
             {
                 path:'/contact',
-                element:<Contact></Contact>
+                element:<PrivateRoute><Contact></Contact></PrivateRoute>
             }, 
             {
-                path:'review',
+                path:'/review',
                 element:<Review></Review>
             },
             {
-                path:'login',
+                path:'/login',
                 element: <Login></Login>
             },
             {
-                path:'singin',
+                path:'/singin',
                 element:<Singin></Singin>
             }
         ]
+    },{
+        path:'/dashboard',
+        element:<PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>
     }
 ])
 export default router;

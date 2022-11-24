@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import bannerImg from '../../assets/images/chair.png';
 import { DayPicker } from 'react-day-picker';
+import { AuthContext } from '../../Context/AuthContext/AuthContext';
 // import bgBanner from '../../assets/images/bg.png';
 
 const AppointmentBanner = ({selectedDate, setSelectedDate}) => {
+
+    const {loading}=useContext(AuthContext);
+    if(loading){
+        return <progress className="lg:mx-[500px] m-32 lg:my-[250px] progress w-56"></progress>
+       }
+
     return (
         <header>
              {/* style={

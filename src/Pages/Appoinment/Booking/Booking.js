@@ -1,9 +1,13 @@
 import { format } from 'date-fns/esm';
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Context/AuthContext/AuthContext';
 
-const Booking = ({ treatment, selectedDate,setTreatment}) => {
+const Booking = ({ treatment, selectedDate, setTreatment ,refetch}) => {
     const { name, slots } = treatment; //treatment is appointment options just different name
     const date = format(selectedDate, 'PP');
+    const { user } = useContext(AuthContext);
+
 
     const handleBooking = event => {
         event.preventDefault();
@@ -14,15 +18,34 @@ const Booking = ({ treatment, selectedDate,setTreatment}) => {
         const phone = form.phone.value;
         const booking = {
             appointmentDate: date,
-            treatment:name,
+            treatment: name,
             patinent: Name,
             slot,
             email,
             phone,
         }
         //todo: send data to the server
-        console.log(booking);
-        setTreatment(null);
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if
+                    (data.acknowledged) {
+                    setTreatment(null);
+                    toast.success('Booking Done')
+                    refetch();
+                }
+                else{
+                    toast.error(data.message)
+                }
+            })
+
     }
 
     return (
@@ -42,8 +65,8 @@ const Booking = ({ treatment, selectedDate,setTreatment}) => {
                                 >{slot}</option>)
                             }
                         </select>
-                        <input name='Name' type="text" placeholder="Your Name" className="input w-full input-bordered mt-6" required />
-                        <input name='email' type="email" placeholder="Email" className="input w-full input-bordered mt-6" required />
+                        <input name='Name' type="text" defaultValue={user?.displayName} placeholder="Your Name" className="input w-full input-bordered mt-6" disabled />
+                        <input name='email' type="email" defaultValue={user?.email} placeholder="Email" className="input w-full input-bordered mt-6" disabled />
                         <input name='phone' type="text" placeholder="Phone" className="input w-full input-bordered mt-6" required />
                         <input type="submit" className='w-full mt-6 input-bordered max-w-xm btn ' value="Book It" />
                     </form>
