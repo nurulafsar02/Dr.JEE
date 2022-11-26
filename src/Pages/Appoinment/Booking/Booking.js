@@ -38,7 +38,7 @@ const Booking = ({ treatment, selectedDate, setTreatment ,refetch}) => {
                 if
                     (data.acknowledged) {
                     setTreatment(null);
-                    toast.success('Booking Done')
+                    toast.success('Booking Done');
                     refetch();
                 }
                 else{
