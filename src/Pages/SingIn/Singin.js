@@ -11,7 +11,7 @@ const Singin = () => {
     });
     const { createUser, updateUser } = useContext(AuthContext);
     const [signUpError, setSignUPError] = useState('')
-    
+
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
@@ -33,8 +33,7 @@ const Singin = () => {
 
                 updateUser(userInfo)
                     .then(() => {
-                        navigate(from, { replace: true });
-                        
+                        saveUser(data.name, data.email)
                     })
                     .catch(err => console.log(err));
             })
@@ -43,8 +42,26 @@ const Singin = () => {
                 setSignUPError(error.message)
             });
     }
+
+    const saveUser = (name, email) => {
+        const user = { name, email };
+        fetch('http://localhost:5000/user', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                navigate(from, {replace: true});
+
+            })
+    }
+
     return (
-        <div className='h-[450px] mt-10 ml-12 lg:ml-0  lg:mb-20 mb-[500px]  grid lg:grid-cols-2 grid-cols-1 '>
+        <div className='h-[450px] mt-10 ml-12 lg:ml-0  lg:mb-28 mb-[500px]  grid lg:grid-cols-2 grid-cols-1 '>
             <div className='w-96 lg:ml-52 px-8 pb-8 m-0  shadow-2xl rounded-2xl'>
                 <h2 className='text-2xl font-bold my-5 text-center'>Singin</h2>
                 <form onSubmit={handleSubmit(handleSingin)}>
@@ -56,9 +73,9 @@ const Singin = () => {
                             <option value="other">other</option>
                         </select>
                         <label className="label"><span className="label-text">Name</span></label>
-                        <input type="text" 
-                        {...register("name")} 
-                        className="input input-bordered w-full mb-1 " />
+                        <input type="text"
+                            {...register("name")}
+                            className="input input-bordered w-full mb-1 " />
 
                         <label className="label"><span className="label-text">Email</span></label>
 
